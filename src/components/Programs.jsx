@@ -1,20 +1,20 @@
 import React from 'react'
 import { programs } from '../data'
 import {Card} from "@heroui/react";
+import ProgramsCateg from './ProgramsCateg';
+import { getCategories, getPrograms } from '../utils';
+import { useState } from 'react';
 
 
 export const Programs = () => {
+     const [selectedPrograms, setselectedPrograms] = useState(getPrograms('összes'))
+     console.log(selectedPrograms)
     return (
         <div>
             <h2 className='text-2xl text-center p-5'>Iskolai programok</h2>
-            {/* <ul>
-            {programs.map(({id,title})=>
-                <li key={id}>{title}</li>
-            )}
-
-        </ul> */}
+        <ProgramsCateg categories={getCategories(programs)} setselectedPrograms={setselectedPrograms}/>
             <div className='flex flex-wrap justify-center gap-4'>
-                {programs.map(({id,title,category,price,participants,capacity,indoor}) =>
+                {selectedPrograms.map(({id,title,category,price,participants,capacity,indoor}) =>
                     <Card key={id} className="w-[250]" variant="default">
                         <Card.Header>
                             <Card.Title>{title}</Card.Title>
